@@ -1,0 +1,88 @@
+package pages;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+
+public class PageObjects {
+	public RemoteWebDriver driver;
+	public static String borrow__error__text = "//*[@class='borrow__error__text']";
+	public static String single__btn = "(//*[@class='btn'])[1]";
+	public static String home__btn = "(//*[@class='btn'])[3]";
+	public static String borrowResultTextAmount = "borrowResultTextAmount";
+	public static String errorMsg = "required";
+	
+	
+	
+	@FindBy(how=How.XPATH,using="(//*[@class='input__wrapper']/child::input)[1]")
+	public WebElement yourincome;
+		
+	@FindBy(how=How.XPATH,using="(//*[@class='input__wrapper']/child::input)[2]")
+	public WebElement otherincome;
+		
+	@FindBy(how=How.XPATH,using="(//*[@class='input__wrapper']/child::input)[5]")
+	public WebElement Livingexpenses;
+		
+	@FindBy(how=How.XPATH,using="(//*[@class='input__wrapper']/child::input)[6]")
+	public WebElement homeLoan;
+	@FindBy(how=How.XPATH,using="(//*[@class='input__wrapper']/child::input)[7]")
+	public WebElement otherLoan;
+	@FindBy(how=How.XPATH,using="(//*[@class='input__wrapper']/child::input)[8]")
+	public WebElement otherCommitments;
+	@FindBy(how=How.XPATH,using="(//*[@class='input__wrapper']/child::input)[9]")
+	public WebElement cardLimit;
+	@FindBy(how=How.ID,using="btnBorrowCalculater")
+	public WebElement btnBorrowCalculater;
+	@FindBy(how=How.XPATH,using="(//*[@class='start-over'])[2]")
+	public WebElement startOver_btn;
+	
+		
+	//Constructor method for connecting with runner classes
+	public PageObjects(RemoteWebDriver driver)
+	{
+		this.driver=driver;
+		PageFactory.initElements(driver,this);
+	}
+		
+	//Operational methods to operate elements
+	public void yourincome(String x)
+	{
+		yourincome.sendKeys(x);
+	}
+	public void otherincome(String x)
+	{
+		otherincome.sendKeys(x);
+	}
+	public void Livingexpenses(String x)
+	{
+		Livingexpenses.sendKeys(x);
+	}
+	public void homeLoan(String x)
+	{
+		homeLoan.sendKeys(x);
+	}
+	public void otherLoan(String x)
+	{
+		otherLoan.sendKeys(x);
+	}
+	public void otherCommitments(String x)
+	{
+		otherCommitments.sendKeys(x);
+	}
+	public void cardLimit(String x)
+	{
+		cardLimit.sendKeys(x);
+	}
+		
+	public void btnBorrowCalculater()
+	{
+		btnBorrowCalculater.click();
+	}
+	public void startOver_btn()
+	{
+		startOver_btn.click();
+	}
+
+}

@@ -1,0 +1,151 @@
+package stepdefinition;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+
+import pages.PageObjects;
+import utilities.TestUtility;
+
+public class GlueCodeMethods<Scenario> extends TestUtility {
+
+	public Scenario s;
+	public PageObjects o;
+
+	@BeforeClass
+	private void method() {
+		// TODO Auto-generated method stub
+		this.s = s;
+	}
+
+	PageObjects pageObjects = new PageObjects(driver);
+
+	@Given("^ lauch site using \"chrome\"$")
+	private void Browser(String bn) {
+		// open browser
+		TestUtility.openBrowser(bn);
+		Assert.assertTrue(true, "browser open");
+	}
+
+	@Then("^ lauch site using \"chrome\"$")
+	public void Site(String url) {
+		// open browser
+		TestUtility.launchSite(url);
+		Assert.assertTrue(true, "launchSite");
+	}
+
+	@And("^Check Property you would like to buy is \"Home to Live\"$")
+	public void HomeLive() {
+		// Check the property is home live
+		String home = driver.findElementByXPath(pageObjects.home__btn).getText();
+
+		assertEquals("Home to live in", home);
+	}
+
+	@And("^enter Your income (before tax) is \"$80,000\"$")
+	public void enterTax() {
+		// entering the beofore tax field
+		pageObjects.yourincome("80000");
+		Assert.assertTrue(true, "sucessfully enter the beforeTax field");
+	}
+
+	@And("^enter Your other income is \"$2,500\"$")
+	public void otherTax() {
+		// entering the other tax field
+		pageObjects.otherincome("2500");
+		Assert.assertTrue(true, "sucessfully enter the otherTax field");
+	}
+
+	@And("^enter Living expenses is \"$500\"$")
+	public void liveExpenses() {
+		// entering the liveExpenses tax field
+		pageObjects.Livingexpenses("500");
+		Assert.assertTrue(true, "sucessfully enter the liveExpenses field");
+	}
+
+	@And("^enter Current home loan repayments is \"$0\"$")
+	public void loanRepayments() {
+		// entering the Home loanRepayments tax field
+		pageObjects.homeLoan("0");
+		Assert.assertTrue(true, "sucessfully enter the  Home loanRepayments field");
+	}
+
+	@And("^enter Other loan repayments is\"$100\"$")
+	public void otherLoan() {
+		// entering the otherLoan tax field
+		pageObjects.otherLoan("100");
+		Assert.assertTrue(true, "sucessfully enter the otherLoan field");
+	}
+
+	@And("^enter other commitments is\"$0\"$")
+	public void otherCommitments() {
+		// entering the otherCommitments tax field
+		pageObjects.otherCommitments("100");
+		Assert.assertTrue(true, "sucessfully enter the otherCommitments field");
+	}
+
+	@And("^enter total credit card limits\"$10,000\"$")
+	public void creditCard() {
+		// entering the creditCard field
+		pageObjects.cardLimit("10000");
+		Assert.assertTrue(true, "sucessfully enter the creditCard field");
+	}
+
+	@Then("^check the borrowing	estimate of \"$479,000\"$")
+	public void borrowResultTextAmount() {
+		// entering the creditCard field
+		String borrowResultTextAmount = driver.findElementByXPath(PageObjects.borrowResultTextAmount).getText();
+		assertEquals("$479,000", borrowResultTextAmount);
+	}
+
+	@Then("^Click on Work out how much I could borrow $")
+	public void btnBorrowCalculater() {
+		// entering the creditCard field
+		pageObjects.btnBorrowCalculater();
+		String errorMsg = driver.findElementByXPath(PageObjects.errorMsg).getText();
+		if (errorMsg.equalsIgnoreCase("Required")) {
+			assertEquals("Required", errorMsg);
+		} else {
+			assertTrue(false);
+			TestUtility.screeshot();
+		}
+	}
+
+	@And("^click on start over$")
+	public void startOver_btn() {
+		// entering the otherLoan tax field
+		pageObjects.startOver_btn();
+		Assert.assertTrue(true, "sucessfully click on startOver_btn");
+	}
+
+	@Then("^enter Living expenses is \"$1\"$")
+	public void liveExpense() {
+		// entering the liveExpenses tax field
+		pageObjects.Livingexpenses("1");
+		Assert.assertTrue(true, "sucessfully enter the liveExpenses field");
+	}
+
+	@And("^Click on Work out how much I could borrow$")
+	public void btnBorrowCalculaterbtn() {
+		// click on btnBorrowCalculaterbtn
+		pageObjects.btnBorrowCalculater();
+		String errorMsg = driver.findElementByXPath(PageObjects.borrow__error__text).getText();
+		String errorText = "Based on the details you've entered, we're unable to give you an estimate of your borrowing power with this calculator. For questions, call us on";
+		if (errorMsg.equalsIgnoreCase(errorText)) {
+			assertEquals(errorText, errorMsg);
+		} else {
+			assertTrue(false);
+			TestUtility.screeshot();
+		}
+
+	}
+
+	@BeforeClass
+	private void quiteBrowser() {
+		// closing browser
+		driver.quit();
+	}
+
+}

@@ -1,0 +1,8 @@
+package tests;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(features = { ".\\src\\test\\resources\\feature1.feature" }, monochrome = true, glue = {
+		"classpath=stepdefinition" })
+public class RunnerClass {
+
+}

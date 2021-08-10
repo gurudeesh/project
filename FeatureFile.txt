@@ -1,0 +1,43 @@
+@tag
+Feature: borrowing calculator
+
+  @tag1
+  Scenario: Validate title
+    Given launch site using"chrome"
+    Then title should be "ANZ"
+    When Close Site
+
+  @tag2
+  Scenario Outline: enter all "valid fields"
+    Given lauch site using "chrome"
+    When Application type is "single"
+    And select Number of dependants is "0"
+    And Check Property you would like to buy is "Home to Live"
+    And enter Your income (before tax) is "$80,000"
+    And enter Your other income is "$10,000"
+    And enter Living expenses is "$500"
+    And enter Current home loan repayments is "$0"
+    And enter Other loan repayments is "$100"
+    And enter other commitments is "$0"
+    And enter total credit card limits "$10,000"
+    Then check the borrowing estimate of "$479,000"
+    When Close Site
+
+  @tag3
+  Scenario Outline: All fields should be "blank"
+    Given lauch site using "chrome"
+    Then Click on Work out how much I could borrow
+    And click on start over
+    When Close Site
+
+  @tag4
+  Scenario Outline: enter only one field"Living expenses"
+    Given lauch site using "chrome"
+    Then enter Living expenses is "$1"
+    And Click on Work out how much I could borrow
+    Then Check the error <msg>
+    When Close Site
+
+    Examples: 
+      | msg                                                                                                                                                             |
+      | Based on the details you've entered, we're unable to give you an estimate of your borrowing power with this calculator. For questions, call us on 1800 100 641. |
